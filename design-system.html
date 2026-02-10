@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System - TastyDelivery</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#E11D48",
+              "background-light": "#F9FAFB",
+              "background-dark": "#111827",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+        .ds-section { margin-bottom: 3rem; padding: 2rem; border-radius: 1.5rem; border: 1px solid rgb(241 245 249); background: white; box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); }
+        .dark .ds-section { border-color: rgb(30 41 59); background: rgb(15 23 42); }
+
+        .ds-title { font-size: 1.5rem; line-height: 2rem; font-weight: 700; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgb(241 245 249); color: rgb(15 23 42); }
+        .dark .ds-title { border-bottom-color: rgb(30 41 59); color: white; }
+
+        .ds-label { font-size: 0.75rem; line-height: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: rgb(148 163 184); margin-bottom: 0.5rem; }
+
+        .ds-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media (min-width: 768px) { .ds-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (min-width: 1024px) { .ds-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen font-sans p-4 md:p-12">
+    <div class="max-w-6xl mx-auto">
+        <header class="mb-12">
+            <h1 class="text-4xl font-black text-primary mb-2">Design System</h1>
+            <p class="text-slate-500 dark:text-slate-400">Guia visual e manual de componentes do TastyDelivery.</p>
+            <div class="mt-4 flex gap-4">
+                <button onclick="document.documentElement.classList.toggle('dark')" class="px-4 py-2 bg-slate-200 dark:bg-slate-800 rounded-lg text-sm font-semibold">Alternar Tema Escuro/Claro</button>
+                <a href="index.html" class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-semibold">Voltar para o App</a>
+            </div>
+        </header>
+
+        <!-- Cores -->
+        <section class="ds-section">
+            <h2 class="ds-title">Cores</h2>
+            <div class="ds-grid">
+                <div>
+                    <div class="ds-label">Brand Primary</div>
+                    <div class="flex items-center gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl">
+                        <div class="w-16 h-16 bg-primary rounded-xl shadow-lg shadow-primary/20"></div>
+                        <div>
+                            <p class="font-bold text-slate-900 dark:text-white">Primary (Rose 600)</p>
+                            <p class="text-xs font-mono text-slate-500">#E11D48</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="ds-label">Backgrounds</div>
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-4 p-2 bg-slate-50 dark:bg-slate-800 rounded-xl">
+                            <div class="w-10 h-10 bg-background-light border border-slate-200 rounded-lg"></div>
+                            <span class="text-sm font-medium">Light (#F9FAFB)</span>
+                        </div>
+                        <div class="flex items-center gap-4 p-2 bg-slate-50 dark:bg-slate-800 rounded-xl">
+                            <div class="w-10 h-10 bg-background-dark rounded-lg"></div>
+                            <span class="text-sm font-medium">Dark (#111827)</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="ds-label">Neutral / Slate</div>
+                    <div class="flex flex-wrap gap-2">
+                        <div class="w-8 h-8 bg-slate-50 rounded shadow-sm border"></div>
+                        <div class="w-8 h-8 bg-slate-100 rounded shadow-sm"></div>
+                        <div class="w-8 h-8 bg-slate-200 rounded shadow-sm"></div>
+                        <div class="w-8 h-8 bg-slate-400 rounded shadow-sm"></div>
+                        <div class="w-8 h-8 bg-slate-600 rounded shadow-sm"></div>
+                        <div class="w-8 h-8 bg-slate-800 rounded shadow-sm"></div>
+                        <div class="w-8 h-8 bg-slate-900 rounded shadow-sm"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tipografia -->
+        <section class="ds-section">
+            <h2 class="ds-title">Tipografia (Inter)</h2>
+            <div class="space-y-6">
+                <div>
+                    <div class="ds-label">Headings</div>
+                    <div class="space-y-2">
+                        <h1 class="text-3xl font-black">Heading 1 (30px/Black)</h1>
+                        <h2 class="text-2xl font-bold">Heading 2 (24px/Bold)</h2>
+                        <h3 class="text-xl font-semibold">Heading 3 (20px/Semibold)</h3>
+                        <h4 class="text-lg font-medium">Heading 4 (18px/Medium)</h4>
+                    </div>
+                </div>
+                <div>
+                    <div class="ds-label">Body & Small</div>
+                    <div class="space-y-2">
+                        <p class="text-base text-slate-600">Body Text (16px) - Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        <p class="text-sm text-slate-500">Small Text (14px) - Utilizado para metadados e descrições secundárias.</p>
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-400">Overline (12px/Bold/Tracking)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Botões -->
+        <section class="ds-section">
+            <h2 class="ds-title">Botões</h2>
+            
+            <!-- Primary Buttons -->
+            <div class="mb-8">
+                <div class="ds-label mb-4">Primary Variations</div>
+                <div class="ds-grid">
+                    <div class="space-y-4">
+                        <div class="ds-label">Primary (Full Width)</div>
+                        <button class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 hover:bg-red-700 transition-all">Botão Principal</button>
+                        
+                        <div class="ds-label">Primary with Icon</div>
+                        <button class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 flex items-center justify-center gap-2">
+                            <span class="material-icons-round text-lg">shopping_basket</span>
+                            Botão com Ícone
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="ds-label">Botão - Texto Centralizado (Ícone não desloca)</div>
+                        <button class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 hover:bg-red-700 transition-all relative">
+                            <span class="material-icons-round text-lg absolute left-6 top-1/2 -translate-y-1/2">whatsapp</span>
+                            <span class="block w-full text-center">Fazer Pedido</span>
+                        </button>
+
+                        <div class="ds-label">Modal Add Button</div>
+                        <button class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 hover:bg-red-700 transition-all flex items-center justify-center gap-2">
+                            <span class="material-icons-round text-lg">shopping_basket</span>
+                            Adicionar - R$ 28.50
+                        </button>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="ds-label">Floating Cart Button</div>
+                        <button class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 hover:bg-red-700 transition-all flex items-center justify-between px-6">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                                    <span class="font-bold text-sm">3</span>
+                                </div>
+                                <span>Ver Carrinho</span>
+                            </div>
+                            <span>R$ 89.70</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secondary & Text Buttons -->
+            <div class="mb-8">
+                <div class="ds-label mb-4">Secondary & Text</div>
+                <div class="ds-grid">
+                    <div class="space-y-4">
+                        <div class="ds-label">Secondary / Outline</div>
+                        <button class="w-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700 px-6 py-3 rounded-2xl font-semibold">Botão Secundário</button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="ds-label">Text Button (Link style)</div>
+                        <button class="text-sm font-medium text-primary hover:text-red-700 transition-colors">Limpar</button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="ds-label">Começar a Comprar</div>
+                        <button class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 hover:bg-red-700 transition-all">Começar a Comprar</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Pills -->
+            <div class="mb-8">
+                <div class="ds-label mb-4">Category Pills</div>
+                <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+                    <button class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-white shadow-lg shadow-primary/25 text-sm font-medium">Hambúrgueres</button>
+                    <button class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-sm font-medium">Pizzas</button>
+                    <button class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-sm font-medium">Bebidas</button>
+                </div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="mb-8">
+                <div class="ds-label mb-4">Payment Method Buttons</div>
+                <div class="grid grid-cols-3 gap-2 max-w-md">
+                    <button class="flex flex-col items-center justify-center gap-1 py-3 rounded-xl border border-primary bg-red-50 dark:bg-red-900/20 text-primary transition-all">
+                        <span class="material-icons-round">payments</span>
+                        <span class="text-xs font-semibold">Dinheiro</span>
+                    </button>
+                    <button class="flex flex-col items-center justify-center gap-1 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+                        <span class="material-icons-round">credit_card</span>
+                        <span class="text-xs font-semibold">Cartão</span>
+                    </button>
+                    <button class="flex flex-col items-center justify-center gap-1 py-3 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+                        <span class="material-icons-round">qr_code</span>
+                        <span class="text-xs font-semibold">PIX</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div>
+                <div class="ds-label mb-4">Action Buttons</div>
+                <div class="flex flex-wrap gap-4">
+                    <div class="text-center">
+                        <div class="ds-label">Quantity (-)</div>
+                        <button class="w-7 h-7 flex items-center justify-center rounded-md bg-white dark:bg-slate-800 shadow-sm text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">
+                            <span class="material-icons-round text-sm">remove</span>
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <div class="ds-label">Quantity (+)</div>
+                        <button class="w-7 h-7 flex items-center justify-center rounded-md bg-primary text-white shadow-sm hover:bg-red-700 transition-colors">
+                            <span class="material-icons-round text-sm">add</span>
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <div class="ds-label">Add (Floating)</div>
+                        <button class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center shadow-md shadow-primary/20 hover:bg-red-700 transition-colors">
+                            <span class="material-icons-round text-lg">add</span>
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <div class="ds-label">Back</div>
+                        <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                            <span class="material-icons-round text-slate-600 dark:text-slate-400">arrow_back_ios_new</span>
+                        </button>
+                    </div>
+                    <div class="text-center">
+                        <div class="ds-label">Close (Icon)</div>
+                        <button class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white hover:scale-105 transition-transform shadow-lg">
+                            <span class="material-icons-round text-xl">close</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Componentes de Formulário -->
+        <section class="ds-section">
+            <h2 class="ds-title">Inputs</h2>
+            <div class="ds-grid">
+                <div>
+                    <div class="ds-label">Text Input</div>
+                    <input type="text" placeholder="Ex: Rua das Flores" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary dark:text-white">
+                </div>
+                <div>
+                    <div class="ds-label">Search Input</div>
+                    <div class="relative flex items-center">
+                        <span class="material-icons-round absolute left-4 text-slate-400 pointer-events-none">search</span>
+                        <input type="text" placeholder="Buscar por pratos..." class="w-full h-12 pl-12 pr-4 bg-white dark:bg-slate-800 border-none rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/20 dark:text-white placeholder-slate-400 text-sm border border-slate-100">
+                    </div>
+                </div>
+                <div>
+                    <div class="ds-label">Textarea</div>
+                    <textarea placeholder="Observações do pedido..." class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary dark:text-white h-24"></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cartões de Produto -->
+        <section class="ds-section">
+            <h2 class="ds-title">Cards</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl">
+                <div>
+                    <div class="ds-label">Product Card (Home)</div>
+                    <div class="bg-white dark:bg-slate-800 rounded-[24px] p-3 shadow-sm border border-slate-100 dark:border-slate-700 relative flex flex-col">
+                        <div class="h-32 w-full rounded-[18px] bg-slate-100 dark:bg-slate-700 overflow-hidden mb-3">
+                            <div class="w-full h-full flex items-center justify-center bg-slate-200 text-slate-400">IMAGE</div>
+                        </div>
+                        <h3 class="font-semibold text-sm text-slate-900 dark:text-white">Nome do Produto</h3>
+                        <p class="text-[10px] text-slate-400 mt-0.5 line-clamp-1">Descrição curta do ingrediente ou prato.</p>
+                        <div class="mt-4 flex justify-between items-center">
+                            <span class="font-bold text-primary">R$ 29,90</span>
+                            <div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center shadow-md">
+                                <span class="material-icons-round text-lg">add</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="ds-label">Category Filter (Active/Normal)</div>
+                    <div class="flex gap-2">
+                        <button class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-white shadow-lg shadow-primary/25 text-sm font-medium">Hambúrgueres</button>
+                        <button class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 border border-slate-100 text-sm font-medium">Pizzas</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Carrinho de Compras -->
+        <section class="ds-section">
+            <h2 class="ds-title">Itens de Lista (Carrinho)</h2>
+            <div class="max-w-md">
+                <div class="bg-white dark:bg-slate-800 p-3 rounded-2xl flex items-center gap-4 shadow-sm border border-slate-100 dark:border-slate-700">
+                    <div class="w-16 h-16 rounded-xl bg-slate-100 dark:bg-slate-700 flex-shrink-0 flex items-center justify-center text-[10px] text-slate-400">IMG</div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-semibold text-slate-800 dark:text-slate-100 truncate text-sm">Pepperoni Clássica</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 truncate">Queijo extra, molho de tomate...</p>
+                        <div class="flex items-center justify-between">
+                            <span class="font-bold text-primary text-sm">R$ 39,90</span>
+                            <div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-900 rounded-lg p-1">
+                                <button class="w-6 h-6 flex items-center justify-center rounded-md bg-white dark:bg-slate-800 shadow-sm text-slate-400">
+                                    <span class="material-icons-round text-xs">remove</span>
+                                </button>
+                                <span class="text-xs font-bold dark:text-white">1</span>
+                                <button class="w-6 h-6 flex items-center justify-center rounded-md bg-primary text-white shadow-sm">
+                                    <span class="material-icons-round text-xs">add</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer class="mt-12 text-center text-slate-400 text-xs pb-12">
+        TastyDelivery Design System &copy; 2026
+    </footer>
+</body>
+</html>

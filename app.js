@@ -445,7 +445,7 @@ const Views = {
                     <div class="w-full max-w-[480px]">
                         <button
                             onclick="App.toggleView('CART')"
-                            class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 hover:bg-red-700 active:scale-[0.98] transition-all flex items-center justify-between px-6"
+                            class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 hover:bg-red-700 transition-all flex items-center justify-between px-6"
                         >
                             <div class="flex items-center gap-3">
                                 <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
@@ -479,7 +479,7 @@ const Views = {
                     </div>
                     <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-2">Seu Carrinho está Vazio</h2>
                     <p class="text-slate-500 mb-8">Parece que você ainda não adicionou nada.</p>
-                    <button onclick="App.toggleView('HOME')" class="bg-primary text-white px-8 py-3 rounded-2xl font-semibold shadow-lg shadow-primary/20 hover:bg-red-700 transition-colors">Começar a Comprar</button>
+                    <button onclick="App.toggleView('HOME')" class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 hover:bg-red-700 transition-all">Começar a Comprar</button>
                 </div>
             `;
         }
@@ -514,7 +514,7 @@ const Views = {
                                         <div class="flex items-center justify-between">
                                             <span class="font-bold text-primary">R$ ${itemTotal.toFixed(2)}</span>
                                             <div class="flex items-center gap-3 bg-slate-50 dark:bg-slate-900 rounded-lg p-1">
-                                                <button onclick="App.cartUpdateQty('${item.id}', -1)" class="w-7 h-7 flex items-center justify-center rounded-md bg-white dark:bg-slate-800 shadow-sm text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">
+                                                <button onclick="App.cartUpdateQty('${item.id}', -1)" class="w-7 h-7 flex items-center justify-center rounded-md bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:text-primary transition-colors">
                                                     <span class="material-icons-round text-sm">remove</span>
                                                 </button>
                                                 <span class="text-sm font-bold w-4 text-center dark:text-white">${item.quantity}</span>
@@ -601,9 +601,12 @@ const Views = {
                 </main>
 
                 <footer class="p-4 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pb-8 sticky bottom-0">
-                    <button onclick="App.checkout()" class="w-full bg-primary hover:bg-red-700 active:scale-[0.98] transition-all text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 shadow-lg shadow-red-500/20">
-                        <span class="material-icons-round flex items-center justify-center">whatsapp</span>
-                        <span>Enviar Pedido no WhatsApp</span>
+                    <button 
+                        onclick="App.checkout()" 
+                        class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 hover:bg-red-700 transition-all relative"
+                    >
+                        <span class="material-icons-round text-lg absolute left-6 top-1/2 -translate-y-1/2">whatsapp</span>
+                        <span class="block w-full text-center">Fazer Pedido</span>
                     </button>
                 </footer>
             </div>
@@ -709,7 +712,7 @@ const Views = {
                         <button
                             id="modal-add-btn"
                             onclick="App.addToCart()"
-                            class="flex-1 bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 hover:bg-red-700 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                            class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 hover:bg-red-700 transition-all flex items-center justify-center gap-2"
                         >
                             <span class="material-icons-round text-lg">shopping_basket</span>
                             Adicionar - R$ ${total.toFixed(2)}
