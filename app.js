@@ -1,6 +1,7 @@
 /**
  * DATA & CONSTANTS
  */
+// Categories removed from UI, but kept here if needed for data structure compatibility or future use
 const CATEGORIES = [
     { id: 'all', name: 'All', icon: 'lunch_dining' },
     { id: 'pizza', name: 'Pizza', icon: 'local_pizza' },
@@ -96,7 +97,7 @@ const MOCK_PRODUCTS = [
 const state = {
     view: 'HOME', // 'HOME' | 'CART'
     cart: [],
-    activeCategory: 'all',
+    activeCategory: 'all', // Kept for logic compatibility, though UI removed
     searchTerm: '',
     // Modal State
     selectedProduct: null,
@@ -118,9 +119,10 @@ const getCartTotal = () => {
 
 const getFilteredProducts = () => {
     return MOCK_PRODUCTS.filter((product) => {
-        const matchesCategory = state.activeCategory === 'all' || product.category === state.activeCategory;
+        // Categories removed from UI, so we ignore category filter or assume 'all'
+        // const matchesCategory = state.activeCategory === 'all' || product.category === state.activeCategory;
         const matchesSearch = product.name.toLowerCase().includes(state.searchTerm.toLowerCase());
-        return matchesCategory && matchesSearch;
+        return matchesSearch;
     });
 };
 
@@ -129,7 +131,7 @@ const getFilteredProducts = () => {
  */
 
 function renderHeader() {
-    const cartCount = getCartCount();
+    // Removed cart button
     return `
       <header class="px-5 py-3 flex justify-between items-center bg-background-light dark:bg-background-dark sticky top-0 z-10">
         <div class="flex items-center space-x-3">
@@ -144,17 +146,6 @@ function renderHeader() {
             </div>
           </div>
         </div>
-        <button
-          data-action="view-cart"
-          class="relative w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-slate-800 shadow-sm border border-slate-100 dark:border-slate-700 hover:bg-slate-50 transition-colors"
-        >
-          <span class="material-icons-round text-slate-700 dark:text-slate-300 pointer-events-none">shopping_cart</span>
-          ${cartCount > 0 ? `
-            <span class="absolute top-1 right-1 w-4 h-4 bg-primary text-white text-[10px] flex items-center justify-center rounded-full border-2 border-white dark:border-slate-800 pointer-events-none">
-              ${cartCount}
-            </span>
-          ` : ''}
-        </button>
       </header>
     `;
 }
@@ -179,38 +170,7 @@ function renderSearch() {
     `;
 }
 
-function renderCategories() {
-    const categoriesHtml = CATEGORIES.map(cat => {
-        const isActive = state.activeCategory === cat.id;
-        const activeClass = isActive 
-            ? 'bg-primary text-white shadow-lg shadow-primary/20' 
-            : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-100 dark:border-slate-700';
-        const textClass = isActive ? 'text-primary font-semibold' : 'text-slate-500 dark:text-slate-400';
-        
-        return `
-            <button
-                data-action="set-category"
-                data-id="${cat.id}"
-                class="flex flex-col items-center space-y-2 group min-w-[64px]"
-            >
-                <div class="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-300 ${activeClass} pointer-events-none">
-                    <span class="material-icons-round text-3xl">${cat.icon}</span>
-                </div>
-                <span class="text-xs font-medium transition-colors ${textClass} pointer-events-none">
-                    ${cat.name}
-                </span>
-            </button>
-        `;
-    }).join('');
-
-    return `
-      <section class="py-2">
-        <div class="flex space-x-4 overflow-x-auto no-scrollbar px-5 pb-4">
-            ${categoriesHtml}
-        </div>
-      </section>
-    `;
-}
+// renderCategories Removed
 
 function renderProductList() {
     const products = getFilteredProducts();
@@ -254,46 +214,33 @@ function renderProductList() {
     `;
 }
 
-function renderFab() {
-    return `
-      <a
-        href="https://wa.me/?text=Hello!%20I%20would%20like%20to%20order..."
-        target="_blank"
-        rel="noreferrer"
-        class="fixed bottom-24 right-5 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center text-white shadow-2xl z-20 hover:scale-110 transition-transform active:scale-90"
-      >
-        <svg fill="currentColor" height="28" viewBox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
-        </svg>
-      </a>
-    `;
-}
+// renderFab Removed
 
-function renderBottomNav() {
+// renderBottomNav Removed
+
+function renderFloatingCart() {
+    const cartCount = getCartCount();
+    if (cartCount === 0) return '';
+    
+    const subtotal = getCartTotal();
+
     return `
-      <nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 px-6 pt-3 pb-8 flex justify-between items-center z-10">
-        <button data-action="view-home" class="flex flex-col items-center space-y-1 text-primary">
-          <span class="material-icons-round pointer-events-none">home</span>
-          <span class="text-[10px] font-bold pointer-events-none">Home</span>
-        </button>
-        <button class="flex flex-col items-center space-y-1 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300">
-          <span class="material-icons-round">explore</span>
-          <span class="text-[10px] font-medium">Explore</span>
-        </button>
-        <button data-action="view-cart" class="flex flex-col items-center space-y-1 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300">
-          <span class="material-icons-round pointer-events-none">assignment</span>
-          <span class="text-[10px] font-medium pointer-events-none">Orders</span>
-        </button>
-        <button class="flex flex-col items-center space-y-1 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300">
-          <span class="material-icons-round">favorite_border</span>
-          <span class="text-[10px] font-medium">Saved</span>
-        </button>
-        <button class="flex flex-col items-center space-y-1 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300">
-          <span class="material-icons-round">person_outline</span>
-          <span class="text-[10px] font-medium">Profile</span>
-        </button>
-      </nav>
-      <div class="fixed bottom-1 left-1/2 -translate-x-1/2 w-32 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full z-20"></div>
+      <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-t border-slate-100 dark:border-slate-800 z-20 flex justify-center">
+         <div class="w-full max-w-[480px]">
+           <button
+              data-action="view-cart"
+              class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg shadow-red-500/30 hover:bg-red-700 active:scale-[0.98] transition-all flex items-center justify-between px-6"
+            >
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center pointer-events-none">
+                  <span class="font-bold text-sm pointer-events-none">${cartCount}</span>
+                </div>
+                <span class="pointer-events-none">View Cart</span>
+              </div>
+              <span class="pointer-events-none">$${subtotal.toFixed(2)}</span>
+            </button>
+         </div>
+      </div>
     `;
 }
 
@@ -302,10 +249,8 @@ function renderHomeScreen() {
         <div>
             ${renderHeader()}
             ${renderSearch()}
-            ${renderCategories()}
             ${renderProductList()}
-            ${renderFab()}
-            ${renderBottomNav()}
+            ${renderFloatingCart()}
         </div>
     `;
 }
