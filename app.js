@@ -307,6 +307,11 @@ const App = {
         const app = document.getElementById('app');
         if (!app) return;
 
+        // Remember which element had focus and its selection
+        const activeElementId = document.activeElement ? document.activeElement.id : null;
+        const selectionStart = document.activeElement ? document.activeElement.selectionStart : null;
+        const selectionEnd = document.activeElement ? document.activeElement.selectionEnd : null;
+
         let html = '';
 
         if (State.view === 'HOME') {
@@ -321,12 +326,14 @@ const App = {
 
         app.innerHTML = html;
         
-        // Inputs lose focus on re-render, so restore focus if simple text inputs
-        if (State.view === 'HOME') {
-            const input = document.getElementById('search-input');
-            if (input && document.activeElement && document.activeElement.id === 'search-input') {
-                input.value = State.searchTerm;
-                input.focus();
+        // Restore focus and selection
+        if (activeElementId) {
+            const element = document.getElementById(activeElementId);
+            if (element) {
+                element.focus();
+                if (selectionStart !== null && selectionEnd !== null && (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA')) {
+                    element.setSelectionRange(selectionStart, selectionEnd);
+                }
             }
         }
     }
@@ -338,7 +345,8 @@ const App = {
 const Views = {
     Home: () => {
         const productsBySearch = DATA.products.filter(p => {
-             return p.name.toLowerCase().includes(State.searchTerm.toLowerCase());
+             return p.name.toLowerCase().includes(State.searchTerm.toLowerCase()) || 
+                    p.description.toLowerCase().includes(State.searchTerm.toLowerCase());
         });
 
         const categoriesToShow = State.selectedCategory === 'all'
@@ -352,7 +360,7 @@ const Views = {
         }, 0);
 
         return `
-            <div class="pb-24 fade-in">
+            <div class="pb-24">
                 <!-- Header (Establishment Info) -->
                 <header class="px-5 py-4 bg-background-light dark:bg-background-dark sticky top-0 z-10">
                     <div class="flex items-center gap-4">
@@ -594,8 +602,8 @@ const Views = {
 
                 <footer class="p-4 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pb-8 sticky bottom-0">
                     <button onclick="App.checkout()" class="w-full bg-primary hover:bg-red-700 active:scale-[0.98] transition-all text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-3 shadow-lg shadow-red-500/20">
-                         <span class="material-icons-round">whatsapp</span>
-                        Enviar Pedido no WhatsApp
+                        <span class="material-icons-round flex items-center justify-center">whatsapp</span>
+                        <span>Enviar Pedido no WhatsApp</span>
                     </button>
                 </footer>
             </div>
